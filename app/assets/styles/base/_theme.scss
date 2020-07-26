@@ -1,0 +1,34 @@
+/* Used to theme the site, so mainly colour variables,
+   or variables that will not break the site that the client
+   might want to alter easily such as border radii 
+   that are used throughout the site.
+*/
+
+/*
+*
+* Main Theming
+*
+*/
+$color-one: lightblue;
+$color-two: indigo;
+$color-three: darkblue;
+
+$shadowColor1: #000;
+$shadowColor2: #000;
+
+/* 
+*
+* Borders
+*
+*/
+
+/* Border Radius Values */
+$radius-small: 0.1rem;
+$radius: 0.5rem;
+$radius-large: 1rem;
+
+/* Box/Text Shadow */
+/* x-axis y-axis blur color*/
+$shadow-light: 0.15rem 0.15rem 0.1rem rgba(0, 0, 0, 0.2);
+$shadow: 0.15rem 0.15rem 0.1rem rgba(0, 0, 0, 0.4);
+$shadow-dark: 0.15rem 0.15rem 0.1rem rgba(0, 0, 0, 0.6);

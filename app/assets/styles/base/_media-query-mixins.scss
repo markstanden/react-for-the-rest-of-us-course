@@ -1,0 +1,32 @@
+/* 
+*
+* Media Queries
+*
+*/
+
+/* 
+* Note media queries perform most reliably
+* across all browsers in em, as shown here:
+* https://zellwk.com/blog/media-query-units/
+*/
+
+/* 530px / 16 = 33.125em */
+@mixin biggerThanSmall {
+  @media only screen and (min-width: 33em) {
+    @content;
+  }
+}
+
+/* 800px / 16 = 50em */
+@mixin biggerThanMedium {
+  @media only screen and (min-width: 50em) {
+    @content;
+  }
+}
+
+/* 1200px / 16 = 75em */
+@mixin biggerThanLarge {
+  @media only screen and (min-width: 75em) {
+    @content;
+  }
+}

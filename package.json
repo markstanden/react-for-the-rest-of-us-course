@@ -1,0 +1,54 @@
+{
+  "name": "new-project",
+  "version": "0.0.1",
+  "description": "Project Description",
+  "main": "/app/",
+  "prettier": "prettier-airbnb-config",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/markstanden/marks-project-base.git"
+  },
+  "author": "Mark Standen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/markstanden/learning-travel-site/issues"
+  },
+  "homepage": "https://github.com/markstanden/learning-travel-site#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "lazysizes": "^5.2.2",
+    "lodash": "^4.17.19"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.5",
+    "@babel/preset-env": "^7.10.4",
+    "autoprefixer": "^9.8.5",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.6.0",
+    "cssnano": "^4.1.10",
+    "fs-extra": "^9.0.1",
+    "html-webpack-plugin": "^4.3.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "normalize-scss": "^7.0.1",
+    "postcss-loader": "^3.0.0",
+    "prettier": "^2.0.5",
+    "prettier-airbnb-config": "^1.0.0",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.2",
+    "style-loader": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "browserslist": [
+    "last 5 version",
+    "> 0.5%",
+    "IE 11"
+  ]
+}
