@@ -115,7 +115,7 @@ let config = {
             presets: [
               /* get babel to transcode jsx for react
               components into compliant code */
-              /* '@babel/preset-react', */
+              '@babel/preset-react',
 
               /* get Babel to transcode new JS into more 
             compliant code for older browsers */

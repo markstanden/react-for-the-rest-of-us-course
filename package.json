@@ -22,7 +22,9 @@
   "dependencies": {
     "axios": "^0.19.2",
     "lazysizes": "^5.2.2",
-    "lodash": "^4.17.19"
+    "lodash": "^4.17.19",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
