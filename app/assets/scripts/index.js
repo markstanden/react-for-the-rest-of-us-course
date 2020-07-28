@@ -20,6 +20,7 @@ import 'lazysizes'
 /*-------------------------------------------------------------------------------*/
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 /* Import created react components */
 import Header from './components/Header.js'
@@ -31,11 +32,21 @@ import Terms from './components/Terms.js'
 /* Create an array of the components to be rendered */
 function Main() {
   return (
-    <>
+    <BrowserRouter>
       <Header />
-      <HomeGuest />
+      <Switch>
+        <Route path="/" exact>
+          <HomeGuest />
+        </Route>
+        <Route path="/about-us">
+          <About />
+        </Route>
+        <Route path="/terms">
+          <Terms />
+        </Route>
+      </Switch>
       <Footer />
-    </>
+    </BrowserRouter>
   )
 }
 

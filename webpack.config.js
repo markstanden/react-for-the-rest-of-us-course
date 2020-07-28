@@ -6,16 +6,16 @@
  */
 
 /* needed for the output property */
-const path = require('path');
-const buildOutputDir = 'dist';
+const path = require('path')
+const buildOutputDir = 'dist'
 
 /* From Brad Schiff's course */
-const currentTask = process.env.npm_lifecycle_event;
-const postCSSPlugins = [require('autoprefixer')];
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HTMLWebpackPlugin = require('html-webpack-plugin');
-const fse = require('fs-extra');
+const currentTask = process.env.npm_lifecycle_event
+const postCSSPlugins = [require('autoprefixer')]
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const HTMLWebpackPlugin = require('html-webpack-plugin')
+const fse = require('fs-extra')
 
 /*-------------------------------
   COMMANDS TO RUN AFTER BUILD
@@ -23,8 +23,8 @@ const fse = require('fs-extra');
 class RunAfterCompile {
   apply(compiler) {
     compiler.hooks.done.tap('Copy Images', function () {
-      fse.copySync('./app/assets/images', `./${buildOutputDir}/assets/images`);
-    });
+      fse.copySync('./app/assets/images', `./${buildOutputDir}/assets/images`)
+    })
   }
 }
 
@@ -60,7 +60,7 @@ let cssConfig = {
     // Compiles Sass to regular CSS
     'sass-loader',
   ],
-};
+}
 
 /* returns an array of files from directory
 filter the array, returning an array of onlybhtml files
@@ -69,14 +69,14 @@ the hashed js scripts for each*/
 let pages = fse
   .readdirSync('./app')
   .filter(function (filename) {
-    return filename.endsWith('.html');
+    return filename.endsWith('.html')
   })
   .map(function (page) {
     return new HTMLWebpackPlugin({
       filename: page,
       template: `./app/${page}`,
-    });
-  });
+    })
+  })
 
 let config = {
   /*  An entry point indicates which module
@@ -126,7 +126,7 @@ let config = {
       },
     ],
   },
-};
+}
 
 /*-----------------------------------
   DEVELOPMENT ONLY CONFIG OPTIONS
@@ -136,29 +136,31 @@ if (currentTask == 'dev') {
   /* add the style loader to the front of the use array,
   the style loader handles the code injection
   this will execute last. */
-  cssConfig.use.unshift('style-loader');
-  console.log(__dirname);
+  cssConfig.use.unshift('style-loader')
+  console.log(__dirname)
   config.output = {
     /* Needs to match HTML script tag
     <script src="bundle.js"></script> */
     path: `${__dirname}/app`,
     filename: 'bundle.js',
-  };
-  config.mode = 'development';
+  }
+  config.mode = 'development'
   config.devServer = {
     before: function (app, server) {
-      server._watch('./app/**/*.html');
+      server._watch('./app/**/*.html')
     },
     contentBase: path.join(__dirname, 'app/'),
     compress: true,
     hot: true,
     port: 3000,
     host: '0.0.0.0',
-  };
+    bonjour: true,
+    historyApiFallback: { index: '/index.html' },
+  }
 
   /* adds meta-data into the browser dev-tools
   to aid debugging */
-  config.devtool = 'source-map';
+  config.devtool = 'source-map'
 }
 
 /*-------------------------------
@@ -168,11 +170,11 @@ if (currentTask == 'dev') {
 if (currentTask == 'build') {
   /* add the css extractor to the start of the cssConfig.use array
   as the use array runs backwards, this will happen last */
-  cssConfig.use.unshift(MiniCssExtractPlugin.loader);
+  cssConfig.use.unshift(MiniCssExtractPlugin.loader)
 
   /* Add the cssnano postcss plugin to the end of the plugin array
   css nano minimises the size of the generated css file */
-  postCSSPlugins.push(require('cssnano'));
+  postCSSPlugins.push(require('cssnano'))
 
   config.output = {
     /* Needs to match HTML script tag
@@ -184,19 +186,19 @@ if (currentTask == 'build') {
     filename: '[name].[chunkhash].js',
     chunkFilename: '[name].[chunkhash].js',
     path: `${__dirname}/${buildOutputDir}`,
-  };
+  }
 
   /* webpack will use production mode, which
   sets many options to production defaults */
-  config.mode = 'production';
+  config.mode = 'production'
 
   /* From Brad Schiff's course
   wepack removes the dependancies from the js bundle,
   to save redownloading static js modules
   (which presumably won't be updated as frequently as our site js */
   config.optimization = {
-    splitChunks: {chunks: 'all'},
-  };
+    splitChunks: { chunks: 'all' },
+  }
 
   config.plugins.push(
     /* From Brad Schiff's course
@@ -206,12 +208,12 @@ if (currentTask == 'build') {
 
     /* creates a new instance of the mini css plugin,
     and sets the required filename for the output */
-    new MiniCssExtractPlugin({filename: 'styles.[chunkhash].css'}),
+    new MiniCssExtractPlugin({ filename: 'styles.[chunkhash].css' }),
 
     /* function to run after the compile steps.  We'll use
     this to copy over images etc */
     new RunAfterCompile()
-  );
+  )
 }
 
-module.exports = config;
+module.exports = config
