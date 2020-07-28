@@ -22,7 +22,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 /* Import created react components */
-import ExampleComponent from './modules/ExampleComponent.js';
+import ExampleComponent from './components/ExampleComponent.js';
 
 /* Create an array of the components to be rendered */
 const componentsToDisplay = [
