@@ -1,13 +1,16 @@
 {
   "folders": [
     {
-      "path": "app"
+      "path": "."
     }
   ],
   "settings": {
     "files.associations": {
       "*.js": "javascriptreact",
       "*.jsx": "javascriptreact"
-    }
+    },
+
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
   }
 }

@@ -1,5 +1,20 @@
 {
-  "file.associations": {
+  "files.associations": {
     "*.js": "javascriptreact"
-  }
+    "*.jsx": "javascriptreact"
+  },
+  
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  "prettier.htmlWhitespaceSensitivity": "strict",
+  "prettier.useEditorConfig": false,
+  "prettier.vueIndentScriptAndStyle": true,
+  "prettier.semi": false,
+  "prettier.singleQuote": true,
+  "prettier.tabWidth": 2,
+  "prettier.trailingComma": "all",
+  "prettier.printWidth": 60,
+  "prettier.arrowParens": "avoid",
+  "explorer.confirmDelete": false
+
 }

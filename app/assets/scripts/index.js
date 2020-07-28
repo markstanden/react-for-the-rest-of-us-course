@@ -2,39 +2,43 @@
 /* WEBPACK DEV SERVER INJECTOR                                                   */
 /*-------------------------------------------------------------------------------*/
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept()
 }
 
 /*-------------------------------------------------------------------------------*/
 /* From webpack docs https://webpack.js.org/loaders/sass-loader/                 */
 /*-------------------------------------------------------------------------------*/
-import '../styles/index.scss';
+import '../styles/index.scss'
 
 /*------------------------------------------------------------------------------*/
 /* Lazy Loading Images                                                          */
 /*------------------------------------------------------------------------------*/
-import 'lazysizes';
+import 'lazysizes'
 
 /*-------------------------------------------------------------------------------*/
 /* REACT SITE INTEGRATION                                                        */
 /*-------------------------------------------------------------------------------*/
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
 /* Import created react components */
-import ExampleComponent from './components/ExampleComponent.js';
+import Header from './components/Header.js'
+import HomeGuest from './components/HomeGuest.js'
+import Footer from './components/Footer.js'
 
 /* Create an array of the components to be rendered */
-const componentsToDisplay = [
-  <ExampleComponent
-    header="Example Header"
-    body="Example of body text"
-    smallPrint="Example of small print text"
-  />,
-];
+function Main() {
+  return (
+    <>
+      <Header />
+      <HomeGuest />
+      <Footer />
+    </>
+  )
+}
 
 /* render react components */
-ReactDOM.render(componentsToDisplay, document.querySelector('#example-component'));
+ReactDOM.render(<Main />, document.querySelector('#app'))
 
 /*-------------------------------------------------------------------------------*/
 /* example code for Lazy loading JS on click event                               */

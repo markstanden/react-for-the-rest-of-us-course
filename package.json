@@ -1,9 +1,8 @@
 {
-  "name": "new-project",
+  "name": "complex-react-app",
   "version": "0.0.1",
-  "description": "Project Description",
+  "description": "React demonstration",
   "main": "/app/",
-  "prettier": "prettier-airbnb-config",
   "scripts": {
     "build": "webpack",
     "dev": "webpack-dev-server",
@@ -11,14 +10,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/markstanden/marks-project-base.git"
+    "url": "git+https://github.com/markstanden/react-for-the-rest-of-us-course.git"
   },
   "author": "Mark Standen",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/markstanden/learning-travel-site/issues"
+    "url": "https://github.com/markstanden/react-for-the-rest-of-us-course/issues"
   },
-  "homepage": "https://github.com/markstanden/learning-travel-site#readme",
+  "homepage": "https://github.com/markstanden/react-for-the-rest-of-us-course#readme",
   "dependencies": {
     "axios": "^0.19.2",
     "lazysizes": "^5.2.2",
@@ -41,7 +40,6 @@
     "normalize-scss": "^7.0.1",
     "postcss-loader": "^3.0.0",
     "prettier": "^2.0.5",
-    "prettier-airbnb-config": "^1.0.0",
     "sass": "^1.26.10",
     "sass-loader": "^9.0.2",
     "style-loader": "^1.2.1",
