@@ -2,17 +2,17 @@
 /* WEBPACK DEV SERVER INJECTOR                                                   */
 /*-------------------------------------------------------------------------------*/
 if (module.hot) {
-  module.hot.accept();
+  module.hot.accept()
 }
 /*-------------------------------------------------------------------------------*/
 /* From webpack docs https://webpack.js.org/loaders/sass-loader/                 */
 /*-------------------------------------------------------------------------------*/
-import '../styles/index.scss';
+import '../styles/index.scss'
 
 /*------------------------------------------------------------------------------*/
 /* Lazy Loading Images                                                          */
 /*------------------------------------------------------------------------------*/
-import 'lazysizes';
+import 'lazysizes'
 
 /*-------------------------------------------------------------------------------*/
 /* Lazy loading JS on click event                                                */
@@ -38,5 +38,3 @@ when a click is made, so reduce data usage, and speed up site load time */
 //     }
 //   });
 // });
-
-
