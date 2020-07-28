@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 function Header() {
   return (
     <header className="header-bar bg-primary mb-3">
@@ -34,7 +34,7 @@ function Header() {
         </form>
       </div>
     </header>
-  );
+  )
 }
 
-export default Header;
+export default Header

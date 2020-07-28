@@ -25,6 +25,8 @@ import ReactDOM from 'react-dom'
 import Header from './components/Header.js'
 import HomeGuest from './components/HomeGuest.js'
 import Footer from './components/Footer.js'
+import About from './components/About.js'
+import Terms from './components/Terms.js'
 
 /* Create an array of the components to be rendered */
 function Main() {
