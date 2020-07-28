@@ -19,7 +19,7 @@ Github won't allow us to fork our own projects, so to use the template the follo
 
 ## Pull the project-base repo down - note the branch name!
 
-> git pull upstream master
+> git pull upstream React
 
 
 ## Now push the 'forked' repo back up to github
