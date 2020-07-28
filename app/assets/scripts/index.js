@@ -4,6 +4,7 @@
 if (module.hot) {
   module.hot.accept();
 }
+
 /*-------------------------------------------------------------------------------*/
 /* From webpack docs https://webpack.js.org/loaders/sass-loader/                 */
 /*-------------------------------------------------------------------------------*/
@@ -15,7 +16,28 @@ import '../styles/index.scss';
 import 'lazysizes';
 
 /*-------------------------------------------------------------------------------*/
-/* Lazy loading JS on click event                                                */
+/* REACT SITE INTEGRATION                                                        */
+/*-------------------------------------------------------------------------------*/
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+/* Import created react components */
+import ExampleComponent from './modules/ExampleComponent.js';
+
+/* Create an array of the components to be rendered */
+const componentsToDisplay = [
+  <ExampleComponent
+    header="Example Header"
+    body="Example of body text"
+    smallPrint="Example of small print text"
+  />,
+];
+
+/* render react components */
+ReactDOM.render(componentsToDisplay, document.querySelector('#example-component'));
+
+/*-------------------------------------------------------------------------------*/
+/* example code for Lazy loading JS on click event                               */
 /*-------------------------------------------------------------------------------*/
 
 // let modal;
@@ -38,5 +60,3 @@ when a click is made, so reduce data usage, and speed up site load time */
 //     }
 //   });
 // });
-
-
