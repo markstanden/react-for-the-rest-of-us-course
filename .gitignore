@@ -1,6 +1,8 @@
 # Project Basics
 node_modules/
 
+secrets/
+
 # Netlify will create build folder for us.
 dist/
 build/
