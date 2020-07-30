@@ -2,6 +2,7 @@
 node_modules/
 
 secrets/
+react-course/
 
 # Netlify will create build folder for us.
 dist/

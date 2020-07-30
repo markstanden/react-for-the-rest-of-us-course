@@ -62,6 +62,25 @@ let cssConfig = {
   ],
 }
 
+let jsConfig = {
+  test: /\.js$/,
+  exclude: /(node_modules)/,
+  use: {
+    loader: 'babel-loader',
+    options: {
+      presets: [
+        /* get babel to transcode jsx for react
+              components into compliant code */
+        '@babel/preset-react',
+
+        /* get Babel to transcode new JS into more 
+            compliant code for older browsers */
+        /* '@babel/preset-env', */
+      ],
+    },
+  },
+}
+
 /* returns an array of files from directory
 filter the array, returning an array of onlybhtml files
 run htmlwebpackplugin on each html file in the array, adding
@@ -103,28 +122,7 @@ let config = {
   plugins: pages,
   target: 'web',
   module: {
-    rules: [
-      cssConfig,
-
-      {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: [
-              /* get babel to transcode jsx for react
-              components into compliant code */
-              '@babel/preset-react',
-
-              /* get Babel to transcode new JS into more 
-            compliant code for older browsers */
-              '@babel/preset-env',
-            ],
-          },
-        },
-      },
-    ],
+    rules: [cssConfig, jsConfig],
   },
 }
 

@@ -1,21 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Page from './Page.js'
-
-/*   async function handleSubmit(e) {
-      e.preventDefault()
-      try {
-        await Axios.post('http://localhost:8080/register', {
-          username,
-          email,
-          password,
-        })
-        console.log('User was successfully created.')
-      } catch (e) {
-        console.log(e.response.data)
-      }
-    } */
+import Axios from 'axios'
 
 function HomeGuest() {
+  const [username, setUsername] = useState()
+  const [email, setEmail] = useState()
+  const [password, setPassword] = useState()
+  const urlRelPath = '/register'
+
+  async function handleSubmit(e) {
+    e.preventDefault()
+    //Axios.post(a,b) a= url to send the post request to, b= data to send
+    try {
+      await Axios.post(urlRelPath, {
+        username,
+        email,
+        password,
+      })
+      console.log('User was successfully created')
+    } catch (e) {
+      console.log(`User Creation Failed: ${e.response.data}`)
+    }
+  }
+
   return (
     <Page title="Welcome" wide={true}>
       <div className="row align-items-center">
@@ -29,12 +36,13 @@ function HomeGuest() {
           </p>
         </div>
         <div className="col-lg-5 pl-lg-5 pb-3 py-lg-5">
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="username-register" className="text-muted mb-1">
                 <small>Username</small>
               </label>
               <input
+                onChange={e => setUsername(e.target.value)}
                 id="username-register"
                 name="username"
                 className="form-control"
@@ -48,6 +56,7 @@ function HomeGuest() {
                 <small>Email</small>
               </label>
               <input
+                onChange={e => setEmail(e.target.value)}
                 id="email-register"
                 name="email"
                 className="form-control"
@@ -61,6 +70,7 @@ function HomeGuest() {
                 <small>Password</small>
               </label>
               <input
+                onChange={e => setPassword(e.target.value)}
                 id="password-register"
                 name="password"
                 className="form-control"
