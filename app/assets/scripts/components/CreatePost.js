@@ -1,20 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import Page from './Page'
 import Axios from 'axios'
+import { withRouter } from 'react-router-dom'
+import DispatchContext from '../DispatchContext'
 
 function CreatePost(props) {
   const [title, setTitle] = useState()
   const [body, setBody] = useState()
+  const appDispatch = useContext(DispatchContext)
 
   async function handleSubmit(e) {
     e.preventDefault()
     let urlRelPath = '/create-post'
     try {
-      await Axios.post(urlRelPath, {
+      const response = await Axios.post(urlRelPath, {
         title,
         body,
         token: localStorage.getItem('complexAppToken'),
       })
+      // redirect to new post url
+      appDispatch({
+        type: 'flashMessage',
+        value: 'Congrats you created a new post',
+      })
+      props.history.push(`/post/${response.data}`)
       console.log('new post created')
     } catch (e) {
       console.log(e)
@@ -57,4 +66,4 @@ function CreatePost(props) {
   )
 }
 
-export default CreatePost
+export default withRouter(CreatePost)
