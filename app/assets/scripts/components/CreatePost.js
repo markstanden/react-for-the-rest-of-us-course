@@ -3,11 +3,13 @@ import Page from './Page'
 import Axios from 'axios'
 import { withRouter } from 'react-router-dom'
 import DispatchContext from '../DispatchContext'
+import StateContext from '../StateContext'
 
 function CreatePost(props) {
   const [title, setTitle] = useState()
   const [body, setBody] = useState()
   const appDispatch = useContext(DispatchContext)
+  const appState = useContext(StateContext)
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -16,7 +18,7 @@ function CreatePost(props) {
       const response = await Axios.post(urlRelPath, {
         title,
         body,
-        token: localStorage.getItem('complexAppToken'),
+        token: appState.user.token,
       })
       // redirect to new post url
       appDispatch({
@@ -24,7 +26,6 @@ function CreatePost(props) {
         value: 'Congrats you created a new post',
       })
       props.history.push(`/post/${response.data}`)
-      console.log('new post created')
     } catch (e) {
       console.log(e)
     }

@@ -4,21 +4,10 @@
 if (module.hot) {
   module.hot.accept()
 }
-
-/*-------------------------------------------------------------------------------*/
-/* From webpack docs https://webpack.js.org/loaders/sass-loader/                 */
-/*-------------------------------------------------------------------------------*/
-import '../styles/index.scss'
-
-/*------------------------------------------------------------------------------*/
-/* Lazy Loading Images                                                          */
-/*------------------------------------------------------------------------------*/
-import 'lazysizes'
-
-/*-------------------------------------------------------------------------------*/
+/* -------------------------------------------------------------------------------* /
 /* REACT SITE INTEGRATION                                                        */
 /*-------------------------------------------------------------------------------*/
-import React, { useState, useReducer } from 'react'
+import React, { useState, useReducer, useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { useImmerReducer } from 'use-immer'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
@@ -37,6 +26,7 @@ import Terms from './components/Terms.js'
 import CreatePost from './components/CreatePost'
 import ViewSinglePost from './components/ViewSinglePost'
 import FlashMessages from './components/FlashMessages'
+import Profile from './components/Profile'
 
 Axios.defaults.baseURL = 'http://localhost:8080'
 
@@ -51,20 +41,20 @@ function Main() {
     loggedIn: Boolean(localStorage.getItem('complexAppToken')),
     flashMessages: [],
     user: {
-      token: '',
-      username: '',
-      avatar: '',
+      token: localStorage.getItem('complexAppToken'),
+      username: localStorage.getItem('complexAppUsername'),
+      avatar: localStorage.getItem('complexAppAvatar'),
     },
   }
-
-  // CREATE REDUCER
-  const [state, dispatch] = useImmerReducer(ourReducer, initialState)
 
   // DEFINE THE DISPATCH CALLS
   function ourReducer(draft, action) {
     switch (action.type) {
       case 'login':
         draft.loggedIn = true
+        draft.user.token = action.data.token
+        draft.user.username = action.data.username
+        draft.user.avatar = action.data.avatar
         break
       case 'logout':
         draft.loggedIn = false
@@ -75,6 +65,26 @@ function Main() {
     }
   }
 
+  // CREATE REDUCER
+  // state is the current values of the state variables, initialised by initialState object
+  // dispatch is the function whos arguments are passed to the ourReducer function
+  // the ourReducer function can now modify the state object (labelled draft in our case)
+  // and useImmerReducer returns a newObject to state, with the alterations made.
+
+  const [state, dispatch] = useImmerReducer(ourReducer, initialState)
+
+  useEffect(() => {
+    if (state.loggedIn) {
+      localStorage.setItem('complexAppToken', state.user.token)
+      localStorage.setItem('complexAppUsername', state.user.username)
+      localStorage.setItem('complexAppAvatar', state.user.avatar)
+    } else {
+      localStorage.removeItem('complexAppToken')
+      localStorage.removeItem('complexAppUsername')
+      localStorage.removeItem('complexAppAvatar')
+    }
+  }, [state.loggedIn])
+
   return (
     <StateContext.Provider value={state}>
       <DispatchContext.Provider value={dispatch}>
@@ -82,6 +92,9 @@ function Main() {
           <FlashMessages messages={state.flashMessages} />
           <Header />
           <Switch>
+            <Route path="/profile/:username">
+              <Profile />
+            </Route>
             <Route path="/" exact>
               {state.loggedIn ? <Home /> : <HomeGuest />}
             </Route>
