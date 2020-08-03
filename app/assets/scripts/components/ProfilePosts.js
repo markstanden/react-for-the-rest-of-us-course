@@ -3,15 +3,17 @@ import Axios from 'axios'
 import { useParams, Link } from 'react-router-dom'
 import LoadingDotsIcon from './LoadingDotsIcon'
 
-function ProfilePosts(props) {
+function ProfilePosts() {
   const { username } = useParams()
   const [isLoading, setIsLoading] = useState(true)
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
+    const ourRequest = Axios.CancelToken.source()
+
     async function fetchPosts() {
       try {
-        const response = await Axios.get(`/profile/${username}/posts`)
+        const response = await Axios.get(`/profile/${username}/posts`, { cancelToken: ourRequest.token })
         setPosts(response.data)
         setIsLoading(false)
       } catch (error) {
@@ -19,6 +21,9 @@ function ProfilePosts(props) {
       }
     }
     fetchPosts()
+    return () => {
+      ourRequest.cancel('There was a problem, Cancelled Profile Posts request.')
+    }
   }, [])
 
   if (isLoading) return <LoadingDotsIcon />
@@ -31,12 +36,8 @@ function ProfilePosts(props) {
         ${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}
         `
         return (
-          <Link
-            key={post._id}
-            to={`/post/${post._id}`}
-            className="list-group-item list-group-item-action">
-            <img className="avatar-tiny" src={post.avatar} />{' '}
-            <strong>{`${post.title} `}</strong>
+          <Link key={post._id} to={`/post/${post._id}`} className="list-group-item list-group-item-action">
+            <img className="avatar-tiny" src={post.avatar} /> <strong>{`${post.title} `}</strong>
             <span className="text-muted small">on {dateFormatted} </span>
           </Link>
         )

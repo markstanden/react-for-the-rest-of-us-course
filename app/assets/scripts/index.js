@@ -30,7 +30,6 @@ import Profile from './components/Profile'
 
 Axios.defaults.baseURL = 'http://localhost:8080'
 
-/* Create an array of the components to be rendered */
 function Main() {
   /* 
     APP GLOBAL STATE REDUCER

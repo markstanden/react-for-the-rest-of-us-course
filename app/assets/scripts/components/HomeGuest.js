@@ -16,7 +16,7 @@ function HomeGuest() {
         username,
         email,
         password,
-      })
+      }, {ourRequest.cancel("There was a problem - form submission cancelled")})
       console.log('User was successfully created')
     } catch (e) {
       console.log(`User Creation Failed: ${e.response.data}`)

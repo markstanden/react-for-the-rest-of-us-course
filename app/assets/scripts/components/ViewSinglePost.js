@@ -11,12 +11,11 @@ function ViewSinglePost(props) {
 
   useEffect(() => {
     const ourRequest = Axios.CancelToken.source()
+    console.log(ourRequest)
 
     async function fetchPost() {
       try {
-        const response = await Axios.get(`/post/${id}`, {
-          cancelToken: ourRequest.token,
-        })
+        const response = await Axios.get(`/post/${id}`, { cancelToken: ourRequest.token })
         setPost(response.data)
         setIsLoading(false)
       } catch (error) {
@@ -25,7 +24,7 @@ function ViewSinglePost(props) {
     }
     fetchPost()
     return () => {
-      // ourRequest.cancel()
+      ourRequest.cancel('Single Post Fetch Request Cancelled')
     }
   }, [])
 
@@ -58,11 +57,7 @@ function ViewSinglePost(props) {
         <Link to={`/profile/${post.author.username}`}>
           <img className="avatar-tiny" src={post.author.avatar} />
         </Link>
-        Posted by{' '}
-        <Link to={`/profile/${post.author.username}`}>
-          {post.author.username}
-        </Link>{' '}
-        on {dateFormatted}
+        Posted by <Link to={`/profile/${post.author.username}`}>{post.author.username}</Link> on {dateFormatted}
       </p>
 
       <div className="body-content">{post.body}</div>
